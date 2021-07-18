@@ -8,7 +8,9 @@ spec:
     ports:
         - port: 8181
           targetPort: 8181
-    type: LoadBalancer
+          nodePort: 30036
+          protocol: TCP
+    type: NodePort
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -28,6 +30,6 @@ spec:
     spec:
       containers:
         - name: k8s-pdsmanagement
-          image: kajalrawal/pdsmanagement
+          image: gswain3316/pdsmanagement:0.0.1-SNAPSHOT
           ports:
             - containerPort: 8181

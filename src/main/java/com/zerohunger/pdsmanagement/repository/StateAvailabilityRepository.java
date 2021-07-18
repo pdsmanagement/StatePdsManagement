@@ -1,13 +1,17 @@
 package com.zerohunger.pdsmanagement.repository;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.data.mongodb.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import com.zerohunger.pdsmanagement.domain.StateAvailability;
+import com.zerohunger.pdsmanagement.domain.GovBodyRawMaterialAvailability;
 
 @Repository
-public interface StateAvailabilityRepository extends MongoRepository<StateAvailability, String> {
+public interface StateAvailabilityRepository extends MongoRepository<GovBodyRawMaterialAvailability, String> {
 
-	StateAvailability findOneByStateName(final String stateName);
+	GovBodyRawMaterialAvailability findOneByStateName(final String stateName);
+
+	@Query("{'stateName' : ?0, 'isStateIndicator' : ?1}")
+    GovBodyRawMaterialAvailability findGovBodyByStateNameAndIsStateIndicator(final String stateInCamelCase, final Boolean isStateIndicator);
 	
 }
